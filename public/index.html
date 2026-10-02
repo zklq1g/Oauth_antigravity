@@ -15,23 +15,23 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem 1rem;
+      padding: 1.5rem 1rem;
     }
     .header {
       text-align: center;
       max-width: 620px;
-      margin-bottom: 2rem;
+      margin-bottom: 1.8rem;
     }
     .header h1 {
-      font-size: 1.75rem;
-      margin: 0 0 .5rem 0;
+      font-size: 1.7rem;
+      margin: 0 0 .4rem 0;
       background: linear-gradient(135deg, #60a5fa, #a855f7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .header p {
       color: #94a3b8;
-      font-size: .9rem;
+      font-size: .88rem;
       margin: 0;
       line-height: 1.5;
     }
@@ -45,7 +45,7 @@
       font-size: .75rem;
       padding: .25rem .7rem;
       border-radius: 999px;
-      margin-top: .75rem;
+      margin-top: .6rem;
       font-weight: 500;
     }
     .status-badge .dot {
@@ -60,7 +60,7 @@
       background: #131b2e;
       border: 1px solid #233150;
       border-radius: 14px;
-      padding: 1.6rem;
+      padding: 1.5rem;
       max-width: 600px;
       width: 100%;
       box-shadow: 0 20px 50px #00000080;
@@ -71,17 +71,17 @@
       font-size: 1.15rem;
       display: flex;
       align-items: center;
-      gap: .6rem;
+      justify-content: space-between;
       color: #f1f5f9;
     }
 
     .step {
       display: flex;
-      gap: .8rem;
+      gap: .75rem;
       align-items: flex-start;
-      margin: 1rem 0 .5rem 0;
+      margin: .9rem 0 .5rem 0;
       color: #cbd5e1;
-      font-size: .9rem;
+      font-size: .88rem;
       line-height: 1.45;
     }
     .step .num {
@@ -101,19 +101,19 @@
 
     .btn-group {
       display: flex;
-      gap: .6rem;
+      gap: .5rem;
       margin-top: .8rem;
       flex-wrap: wrap;
     }
     .btn {
       flex: 1;
-      min-width: 140px;
-      padding: .8rem 1rem;
+      min-width: 130px;
+      padding: .75rem 1rem;
       background: linear-gradient(135deg, #2563eb, #7c3aed);
       color: #fff;
       border: none;
       border-radius: 8px;
-      font-size: .9rem;
+      font-size: .88rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
@@ -133,12 +133,16 @@
     }
     .btn-secondary:hover { background: #27354f; }
 
+    .btn-success {
+      background: linear-gradient(135deg, #059669, #10b981);
+    }
+
     .callout {
       background: #0b1324;
       border-left: 3px solid #38bdf8;
       padding: .85rem 1rem;
-      margin: 1rem 0;
-      font-size: .83rem;
+      margin: .9rem 0;
+      font-size: .82rem;
       color: #94a3b8;
       border-radius: 0 8px 8px 0;
       line-height: 1.5;
@@ -174,7 +178,7 @@
 
     /* Result Card */
     .result-card {
-      background: #0f1d38;
+      background: #0d1b33;
       border: 1px solid #1e3a8a;
       border-radius: 12px;
       padding: 1.2rem;
@@ -192,7 +196,7 @@
       gap: .4rem;
     }
     .token-field {
-      margin: .6rem 0;
+      margin: .7rem 0;
     }
     .token-label {
       font-size: .75rem;
@@ -203,30 +207,69 @@
       display: block;
     }
     .token-val {
-      background: #090e1a;
+      background: #080d19;
       border: 1px solid #233556;
       border-radius: 6px;
       padding: .6rem .8rem;
       font-family: monospace;
       font-size: .8rem;
       word-break: break-all;
-      position: relative;
+    }
+
+    /* Export Bar */
+    .export-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: .5rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #233150;
+    }
+    .export-btn {
+      padding: .65rem .8rem;
+      font-size: .8rem;
+      border-radius: 6px;
+      border: 1px solid #334155;
+      background: #1e293b;
+      color: #f1f5f9;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .4rem;
+      font-weight: 500;
+    }
+    .export-btn:hover {
+      background: #283750;
+      border-color: #475569;
+    }
+    .export-btn-primary {
+      background: #0284c7;
+      border-color: #0369a1;
+      color: #fff;
+    }
+    .export-btn-primary:hover {
+      background: #0369a1;
     }
 
     /* Stored tokens table */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+    }
     table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-top: .8rem; }
     th { text-align: left; color: #64748b; font-weight: 500; border-bottom: 1px solid #233150; padding: .5rem .6rem; }
-    td { padding: .6rem; border-bottom: 1px solid #1a243c; }
+    td { padding: .6rem; border-bottom: 1px solid #1a243c; vertical-align: middle; }
     tr:last-child td { border-bottom: none; }
     .badge {
       display: inline-block;
       background: #090e1a;
       border: 1px solid #233556;
       border-radius: 4px;
-      padding: .2rem .5rem;
+      padding: .2rem .45rem;
       font-family: monospace;
       font-size: .75rem;
-      max-width: 200px;
+      max-width: 170px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -234,27 +277,59 @@
     }
     .badge:hover { border-color: #38bdf8; color: #38bdf8; }
     .empty { color: #64748b; font-size: .85rem; text-align: center; padding: 1.5rem; }
+
+    .tag-count {
+      font-size: .75rem;
+      background: #38bdf820;
+      color: #38bdf8;
+      border: 1px solid #38bdf840;
+      padding: .15rem .5rem;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .row-actions {
+      display: flex;
+      gap: .3rem;
+    }
+    .mini-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      border-radius: 4px;
+      padding: .2rem .4rem;
+      font-size: .7rem;
+      cursor: pointer;
+    }
+    .mini-btn:hover {
+      color: #f1f5f9;
+      border-color: #475569;
+    }
+    .mini-btn-del:hover {
+      color: #f87171;
+      border-color: #ef444455;
+    }
   </style>
 </head>
 <body>
 
   <div class="header">
     <h1>⚡ Antigravity Token Collector</h1>
-    <p>Captures official Google OAuth refresh tokens for Antigravity Tools. Runs 24/7 on Vercel — <strong>your computer does not need to be on!</strong></p>
-    <div class="status-badge"><span class="dot"></span> Ready (Uses Built-in Client)</div>
+    <p>Captures Google OAuth refresh tokens for Antigravity Tools. Runs 24/7 on Vercel — <strong>your PC does not need to be turned on!</strong></p>
+    <div class="status-badge"><span class="dot"></span> 24/7 Cloud Ready</div>
   </div>
 
+  <!-- Main Conversion Card -->
   <div class="card">
-    <h2><span>1️⃣</span> Get Google Auth Link</h2>
+    <h2><span>1️⃣ Collect Token from Friend</span></h2>
     
     <div class="step">
       <span class="num">1</span>
-      <span>Generate the Google authorization link to send to your friend:</span>
+      <span>Generate the Google sign-in link to send:</span>
     </div>
 
     <div class="btn-group">
       <button id="copyLinkBtn" class="btn" onclick="copyAuthLink()">📋 Copy Google Link</button>
-      <button class="btn btn-secondary" onclick="copyChatTemplate()">💬 Copy Chat Message</button>
+      <button class="btn btn-secondary" onclick="copyChatTemplate()">💬 Copy WhatsApp Msg</button>
       <button class="btn btn-secondary" onclick="openAuthDirectly()">↗ Sign In Myself</button>
     </div>
     <div id="linkMsg" class="msg"></div>
@@ -271,9 +346,9 @@
       <span>Paste your friend's returned URL (or code) below:</span>
     </div>
 
-    <input type="text" id="manualInput" class="input-box" placeholder="Paste http://localhost:9999/auth/callback?code=4/0A... or code here" />
+    <input type="text" id="manualInput" class="input-box" placeholder="Paste http://localhost:9999/auth/callback?code=4/0A... here" />
 
-    <button id="exchangeBtn" class="btn" style="width:100%; margin-top: 1rem;" onclick="exchangeCode()">
+    <button id="exchangeBtn" class="btn btn-success" style="width:100%; margin-top: 1rem;" onclick="exchangeCode()">
       ⚡ Convert to Refresh Token
     </button>
     <div id="exchangeMsg" class="msg"></div>
@@ -281,28 +356,59 @@
     <!-- Active Result Display -->
     <div id="resultCard" class="result-card">
       <div class="result-title">✅ Authorization Successful</div>
+      
       <div class="token-field">
         <span class="token-label">Google Account</span>
-        <div id="resEmail" style="font-weight: 600; color: #f8fafc;"></div>
+        <div id="resEmail" style="font-weight: 600; color: #f8fafc; font-size: .95rem;"></div>
       </div>
+
       <div class="token-field">
-        <span class="token-label">Refresh Token (paste this into Antigravity Tools)</span>
+        <span class="token-label">Refresh Token (Required for Antigravity Tools)</span>
         <div id="resToken" class="token-val"></div>
       </div>
-      <button class="btn" style="width: 100%; margin-top: .8rem;" onclick="copyResultToken()">
-        📋 Copy Refresh Token
-      </button>
+
+      <div class="token-field">
+        <span class="token-label">Access Token (Temporary ~1hr)</span>
+        <div id="resAccess" class="token-val" style="color: #94a3b8; font-size: .75rem;"></div>
+      </div>
+
+      <div class="btn-group" style="margin-top: .8rem;">
+        <button class="btn" onclick="copyResultToken()">📋 Copy Refresh Token</button>
+        <button class="btn btn-secondary" onclick="shareResultToken()">📲 Share Token</button>
+      </div>
     </div>
   </div>
 
-  <!-- Saved Tokens History (Local Browser Storage) -->
+  <!-- Saved Tokens History & Phone Export Card -->
   <div class="card">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <h2 style="margin:0;">📦 Saved Tokens History</h2>
-      <button class="btn btn-secondary" style="min-width:auto; padding:.3rem .6rem; font-size:.75rem;" onclick="clearHistory()">Clear</button>
+    <h2>
+      <span style="display:flex; align-items:center; gap:.5rem;">
+        📦 Collected Accounts <span id="countBadge" class="tag-count">0</span>
+      </span>
+      <button class="mini-btn" onclick="clearHistory()">Clear All</button>
+    </h2>
+    <p style="font-size: .8rem; color: #64748b; margin: 0 0 .5rem 0;">Stored in your phone browser so you never lose them. Export anytime to your PC.</p>
+
+    <!-- Phone Export Actions Bar -->
+    <div class="export-bar">
+      <button class="export-btn export-btn-primary" onclick="exportAsJsonFile()">
+        📥 Download JSON
+      </button>
+      <button class="export-btn" onclick="copyBulkTokens()">
+        📋 Copy Bulk Tokens
+      </button>
+      <button class="export-btn" onclick="shareAllAccounts()">
+        📲 Share via App
+      </button>
+      <button class="export-btn" onclick="copyJsonToClipboard()">
+        📋 Copy JSON
+      </button>
     </div>
-    <p style="font-size: .8rem; color: #64748b; margin: .5rem 0 0 0;">Tokens you've generated are stored in your phone's browser so you don't lose them.</p>
-    <div id="historyArea"><p class="empty">No tokens collected yet.</p></div>
+    <div id="exportMsg" class="msg"></div>
+
+    <div class="table-container">
+      <div id="historyArea"><p class="empty">No tokens collected yet.</p></div>
+    </div>
   </div>
 
   <script>
@@ -312,6 +418,7 @@
       if (cachedAuthUrl) return cachedAuthUrl;
       const resp = await fetch("/api/start");
       const data = await resp.json();
+      if (data.error) throw new Error(data.error);
       cachedAuthUrl = data.url;
       return cachedAuthUrl;
     }
@@ -335,7 +442,7 @@
       showMsg("linkMsg", "Generating message...", "");
       try {
         const url = await getAuthUrl();
-        const text = `Hey! Please do this quick sign-in for me:\n\n1. Open this link and sign in: ${url}\n2. Tap Allow\n3. You will see a "Site can't be reached" error screen — that's normal! Just copy the entire URL from your browser address bar and send it back to me.`;
+        const text = `Hey! Could you do this quick Google sign-in for me:\n\n1. Open this link: ${url}\n2. Sign in and tap Allow\n3. You will see a "Site can't be reached" error screen — that is normal! Just copy the entire URL from your browser address bar and send it back to me.`;
         await navigator.clipboard.writeText(text);
         showMsg("linkMsg", "✅ Formatted WhatsApp/chat message copied to clipboard!", "ok");
       } catch (err) {
@@ -344,8 +451,12 @@
     }
 
     async function openAuthDirectly() {
-      const url = await getAuthUrl();
-      window.open(url, "_blank");
+      try {
+        const url = await getAuthUrl();
+        window.open(url, "_blank");
+      } catch (err) {
+        showMsg("linkMsg", "Failed: " + err.message, "err");
+      }
     }
 
     async function exchangeCode() {
@@ -374,17 +485,18 @@
           showMsg("exchangeMsg", "✅ Token collected successfully!", "ok");
           document.getElementById("manualInput").value = "";
 
-          // Show card
           const acc = data.account;
-          document.getElementById("resEmail").textContent = (acc.name ? acc.name + " (" : "") + acc.email + (acc.name ? ")" : "");
+          document.getElementById("resEmail").textContent = (acc.name ? acc.name + " — " : "") + acc.email;
           document.getElementById("resToken").textContent = acc.refresh_token;
+          document.getElementById("resAccess").textContent = acc.access_token || "(none)";
           document.getElementById("resultCard").classList.add("active");
 
-          // Save to local storage
+          // Save account in storage
           saveAccount({
             email: acc.email,
             name: acc.name,
             refresh_token: acc.refresh_token,
+            access_token: acc.access_token,
             saved_at: new Date().toISOString()
           });
           renderHistory();
@@ -398,11 +510,11 @@
 
     function showMsg(id, text, type) {
       const el = document.getElementById(id);
+      if (!el) return;
       el.textContent = text;
       el.className = "msg " + (type || "");
     }
 
-    let lastCopiedToken = "";
     function copyResultToken() {
       const tok = document.getElementById("resToken").textContent;
       navigator.clipboard.writeText(tok).then(() => {
@@ -410,13 +522,26 @@
       });
     }
 
-    function copyVal(val) {
-      navigator.clipboard.writeText(val).then(() => {
-        showMsg("exchangeMsg", "📋 Copied to clipboard!", "ok");
-        setTimeout(() => showMsg("exchangeMsg", ""), 2000);
-      });
+    async function shareResultToken() {
+      const email = document.getElementById("resEmail").textContent;
+      const tok = document.getElementById("resToken").textContent;
+      const shareData = {
+        title: `Google OAuth Token (${email})`,
+        text: `Account: ${email}\nRefresh Token:\n${tok}`
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          showMsg("exchangeMsg", "✅ Shared successfully!", "ok");
+        } catch (_) {}
+      } else {
+        await navigator.clipboard.writeText(shareData.text);
+        showMsg("exchangeMsg", "📋 Copied details to clipboard!", "ok");
+      }
     }
 
+    // ── Local Storage Management ──────────────────────────────────────────
     function getSavedAccounts() {
       try {
         return JSON.parse(localStorage.getItem("ag_tokens") || "[]");
@@ -429,28 +554,150 @@
       localStorage.setItem("ag_tokens", JSON.stringify(list));
     }
 
+    function deleteAccount(email) {
+      if (confirm(`Remove ${email} from saved history?`)) {
+        let list = getSavedAccounts().filter(x => x.email !== email);
+        localStorage.setItem("ag_tokens", JSON.stringify(list));
+        renderHistory();
+      }
+    }
+
     function clearHistory() {
-      if (confirm("Clear saved token history in this browser?")) {
+      if (confirm("Clear all saved accounts from this phone?")) {
         localStorage.removeItem("ag_tokens");
         renderHistory();
       }
     }
 
+    // ── Export Options for Phone ───────────────────────────────────────────
+    function exportAsJsonFile() {
+      const list = getSavedAccounts();
+      if (!list.length) {
+        showMsg("exportMsg", "No accounts to export yet.", "err");
+        return;
+      }
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(list, null, 2));
+      const downloadAnchor = document.createElement("a");
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "collected_accounts.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showMsg("exportMsg", "📥 Downloaded collected_accounts.json!", "ok");
+    }
+
+    function copyBulkTokens() {
+      const list = getSavedAccounts();
+      if (!list.length) {
+        showMsg("exportMsg", "No accounts saved yet.", "err");
+        return;
+      }
+      // Line separated refresh tokens ready for Antigravity Tools Bulk Import
+      const tokens = list.map(a => a.refresh_token).join("\n");
+      navigator.clipboard.writeText(tokens).then(() => {
+        showMsg("exportMsg", `📋 Copied ${list.length} refresh token(s) (1 per line) for Bulk Import!`, "ok");
+      });
+    }
+
+    function copyJsonToClipboard() {
+      const list = getSavedAccounts();
+      if (!list.length) {
+        showMsg("exportMsg", "No accounts saved yet.", "err");
+        return;
+      }
+      navigator.clipboard.writeText(JSON.stringify(list, null, 2)).then(() => {
+        showMsg("exportMsg", `📋 Copied full JSON for ${list.length} account(s)!`, "ok");
+      });
+    }
+
+    async function shareAllAccounts() {
+      const list = getSavedAccounts();
+      if (!list.length) {
+        showMsg("exportMsg", "No accounts saved yet.", "err");
+        return;
+      }
+
+      const formatted = list.map((a, i) => `${i + 1}. ${a.email}\nRefresh Token: ${a.refresh_token}`).join("\n\n");
+      const shareData = {
+        title: `Antigravity Accounts (${list.length})`,
+        text: formatted
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          showMsg("exportMsg", "✅ Shared via phone app!", "ok");
+        } catch (_) {}
+      } else {
+        await navigator.clipboard.writeText(formatted);
+        showMsg("exportMsg", "📋 Copied all accounts to clipboard!", "ok");
+      }
+    }
+
+    function copyVal(val, label) {
+      navigator.clipboard.writeText(val).then(() => {
+        showMsg("exportMsg", `📋 Copied ${label || "value"}!`, "ok");
+        setTimeout(() => showMsg("exportMsg", ""), 2000);
+      });
+    }
+
+    // ── Table Rendering ────────────────────────────────────────────────────
     function renderHistory() {
       const area = document.getElementById("historyArea");
+      const countBadge = document.getElementById("countBadge");
       const list = getSavedAccounts();
+      countBadge.textContent = list.length;
+
       if (!list.length) {
         area.innerHTML = "<p class='empty'>No tokens collected yet.</p>";
         return;
       }
+
       const rows = list.map(a => `
         <tr>
-          <td><strong>${a.name || a.email}</strong><br><span style="color:#64748b;font-size:.75rem;">${a.email}</span></td>
-          <td><span class="badge" title="Tap to copy" onclick="copyVal('${a.refresh_token}')">${a.refresh_token.substring(0,22)}…</span></td>
-          <td style="color:#64748b;font-size:.75rem;">${new Date(a.saved_at).toLocaleDateString()}</td>
+          <td>
+            <strong>${a.name || a.email}</strong><br>
+            <span style="color:#64748b;font-size:.75rem;">${a.email}</span>
+          </td>
+          <td>
+            <span class="badge" title="Tap to copy refresh token" onclick="copyVal('${a.refresh_token}', 'Refresh Token')">
+              ${a.refresh_token.substring(0,20)}…
+            </span>
+          </td>
+          <td>
+            <div class="row-actions">
+              <button class="mini-btn" title="Copy Refresh Token" onclick="copyVal('${a.refresh_token}', 'Refresh Token')">📋</button>
+              <button class="mini-btn" title="Share Account" onclick="shareRow('${a.email}', '${a.refresh_token}')">📲</button>
+              <button class="mini-btn mini-btn-del" title="Delete" onclick="deleteAccount('${a.email}')">✕</button>
+            </div>
+          </td>
         </tr>
       `).join("");
-      area.innerHTML = `<table><thead><tr><th>Account</th><th>Token</th><th>Date</th></tr></thead><tbody>${rows}</tbody></table>`;
+
+      area.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Account</th>
+              <th>Refresh Token</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+    }
+
+    async function shareRow(email, token) {
+      const text = `Account: ${email}\nRefresh Token:\n${token}`;
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: email, text });
+        } catch (_) {}
+      } else {
+        navigator.clipboard.writeText(text);
+        showMsg("exportMsg", `📋 Copied ${email} details!`, "ok");
+      }
     }
 
     renderHistory();
