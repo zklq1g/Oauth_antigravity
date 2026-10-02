@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "antigravity-oauth-helper",
+  "rewrites": [
+    { "source": "/auth/start", "destination": "/api/start" },
+    { "source": "/auth/exchange", "destination": "/api/exchange" }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
+  ]
+}

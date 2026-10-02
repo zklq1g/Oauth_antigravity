@@ -1,0 +1,11 @@
+{
+  "name": "antigravity-oauth-helper",
+  "version": "1.0.0",
+  "description": "Vercel-hosted Google OAuth refresh token collector for Antigravity account pool",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
