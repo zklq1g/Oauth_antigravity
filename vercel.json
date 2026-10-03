@@ -4,7 +4,8 @@
   "rewrites": [
     { "source": "/auth/start", "destination": "/api/start" },
     { "source": "/auth/callback", "destination": "/api/callback" },
-    { "source": "/auth/exchange", "destination": "/api/exchange" }
+    { "source": "/auth/exchange", "destination": "/api/exchange" },
+    { "source": "/debug", "destination": "/api/debug" }
   ],
   "headers": [
     {
