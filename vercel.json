@@ -3,6 +3,7 @@
   "name": "antigravity-oauth-helper",
   "rewrites": [
     { "source": "/auth/start", "destination": "/api/start" },
+    { "source": "/auth/callback", "destination": "/api/callback" },
     { "source": "/auth/exchange", "destination": "/api/exchange" }
   ],
   "headers": [

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Antigravity Token Collector (Cloud Edition)</title>
+  <title>Antigravity Token Collector</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     body {
@@ -20,7 +20,7 @@
     .header {
       text-align: center;
       max-width: 620px;
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.5rem;
     }
     .header h1 {
       font-size: 1.7rem;
@@ -75,29 +75,28 @@
       color: #f1f5f9;
     }
 
-    .step {
-      display: flex;
-      gap: .75rem;
-      align-items: flex-start;
-      margin: .9rem 0 .5rem 0;
-      color: #cbd5e1;
-      font-size: .88rem;
-      line-height: 1.45;
-    }
-    .step .num {
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 50%;
-      min-width: 1.5rem;
-      height: 1.5rem;
+    /* Big Primary Button */
+    .btn-hero {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: .75rem;
+      gap: .6rem;
+      width: 100%;
+      padding: 1rem 1.2rem;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.05rem;
       font-weight: 700;
-      color: #38bdf8;
-      margin-top: .1rem;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 10px 25px #2563eb40;
+      transition: opacity .15s, transform .05s;
+      margin: 1rem 0;
     }
+    .btn-hero:hover { opacity: .95; }
+    .btn-hero:active { transform: scale(0.99); }
 
     .btn-group {
       display: flex;
@@ -121,6 +120,7 @@
       justify-content: center;
       gap: .4rem;
       transition: opacity .15s, transform .05s;
+      text-decoration: none;
     }
     .btn:hover { opacity: .92; }
     .btn:active { transform: scale(0.99); }
@@ -133,10 +133,6 @@
     }
     .btn-secondary:hover { background: #27354f; }
 
-    .btn-success {
-      background: linear-gradient(135deg, #059669, #10b981);
-    }
-
     .callout {
       background: #0b1324;
       border-left: 3px solid #38bdf8;
@@ -148,33 +144,6 @@
       line-height: 1.5;
     }
     .callout strong { color: #f1f5f9; }
-
-    .input-box {
-      width: 100%;
-      background: #0b1324;
-      border: 1px solid #2a3c63;
-      border-radius: 8px;
-      padding: .8rem 1rem;
-      color: #f8fafc;
-      font-family: monospace;
-      font-size: .85rem;
-      margin-top: .5rem;
-    }
-    .input-box:focus {
-      outline: none;
-      border-color: #38bdf8;
-      box-shadow: 0 0 0 2px #38bdf833;
-    }
-
-    .msg {
-      margin-top: .8rem;
-      font-size: .85rem;
-      min-height: 1.2rem;
-      text-align: center;
-      word-break: break-all;
-    }
-    .msg.ok  { color: #4ade80; font-weight: 500; }
-    .msg.err { color: #f87171; font-weight: 500; }
 
     /* Result Card */
     .result-card {
@@ -308,75 +277,78 @@
       color: #f87171;
       border-color: #ef444455;
     }
+    .msg {
+      margin-top: .8rem;
+      font-size: .85rem;
+      min-height: 1.2rem;
+      text-align: center;
+      word-break: break-all;
+    }
+    .msg.ok  { color: #4ade80; font-weight: 500; }
+    .msg.err { color: #f87171; font-weight: 500; }
+    details {
+      margin-top: 1rem;
+      font-size: .82rem;
+      color: #94a3b8;
+    }
+    details summary {
+      cursor: pointer;
+      color: #60a5fa;
+      user-select: none;
+    }
+    .input-box {
+      width: 100%;
+      background: #0b1324;
+      border: 1px solid #2a3c63;
+      border-radius: 8px;
+      padding: .7rem .9rem;
+      color: #f8fafc;
+      font-family: monospace;
+      font-size: .82rem;
+      margin-top: .5rem;
+    }
   </style>
 </head>
 <body>
 
   <div class="header">
     <h1>⚡ Antigravity Token Collector</h1>
-    <p>Captures Google OAuth refresh tokens for Antigravity Tools. Runs 24/7 on Vercel — <strong>your PC does not need to be turned on!</strong></p>
-    <div class="status-badge"><span class="dot"></span> 24/7 Cloud Ready</div>
+    <p>1-tap automatic Google OAuth token capture for Antigravity Tools. Runs 24/7 on Vercel.</p>
+    <div class="status-badge"><span class="dot"></span> Fully Automatic Flow Ready</div>
   </div>
 
-  <!-- Main Conversion Card -->
+  <!-- Main 1-Click Sign-in Card -->
   <div class="card">
-    <h2><span>1️⃣ Collect Token from Friend</span></h2>
-    
-    <div class="step">
-      <span class="num">1</span>
-      <span>Generate the Google sign-in link to send:</span>
+    <h2><span>🚀 1-Tap Google Sign-In</span></h2>
+    <p style="color:#94a3b8; font-size:.88rem; margin:0 0 .5rem 0; line-height:1.5;">
+      Tap the button below to sign in with Google. Once you click <strong>Allow</strong>, Google automatically brings you right back here with your refresh token ready!
+    </p>
+
+    <!-- Direct 1-Click OAuth Redirect -->
+    <a href="/api/start" class="btn-hero">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/></svg>
+      Sign in with Google
+    </a>
+
+    <div class="callout">
+      <strong>Want a friend to sign in?</strong><br />
+      Send them this website's link (<code id="siteUrl"></code>). When they tap <em>Sign in with Google</em>, it will immediately show them their token and a <strong>"Send via WhatsApp"</strong> button to send it straight back to you!
     </div>
 
     <div class="btn-group">
-      <button id="copyLinkBtn" class="btn" onclick="copyAuthLink()">📋 Copy Google Link</button>
-      <button class="btn btn-secondary" onclick="copyChatTemplate()">💬 Copy WhatsApp Msg</button>
-      <button class="btn btn-secondary" onclick="openAuthDirectly()">↗ Sign In Myself</button>
+      <button class="btn btn-secondary" onclick="shareSiteLink()">📲 Share Site Link to Friend</button>
+      <button class="btn btn-secondary" onclick="copySiteLink()">📋 Copy Site Link</button>
     </div>
     <div id="linkMsg" class="msg"></div>
 
-    <div class="callout">
-      <strong>What happens on your friend's phone:</strong><br />
-      1. They sign in and tap <strong>Allow</strong>.<br />
-      2. Their screen shows <em>"This site can't be reached" (localhost:9999)</em> — <strong>that is expected!</strong><br />
-      3. They copy the entire URL from their phone's address bar and send it back to you.
-    </div>
-
-    <div class="step">
-      <span class="num">2</span>
-      <span>Paste your friend's returned URL (or code) below:</span>
-    </div>
-
-    <input type="text" id="manualInput" class="input-box" placeholder="Paste http://localhost:9999/auth/callback?code=4/0A... here" />
-
-    <button id="exchangeBtn" class="btn btn-success" style="width:100%; margin-top: 1rem;" onclick="exchangeCode()">
-      ⚡ Convert to Refresh Token
-    </button>
-    <div id="exchangeMsg" class="msg"></div>
-
-    <!-- Active Result Display -->
-    <div id="resultCard" class="result-card">
-      <div class="result-title">✅ Authorization Successful</div>
-      
-      <div class="token-field">
-        <span class="token-label">Google Account</span>
-        <div id="resEmail" style="font-weight: 600; color: #f8fafc; font-size: .95rem;"></div>
+    <!-- Fallback Manual Exchange -->
+    <details>
+      <summary>Need manual code/URL exchange? (Legacy fallback)</summary>
+      <div style="margin-top:.8rem;">
+        <input type="text" id="manualInput" class="input-box" placeholder="Paste callback URL or code here" />
+        <button class="btn btn-secondary" style="width:100%; margin-top:.5rem;" onclick="exchangeManualCode()">Convert Code</button>
       </div>
-
-      <div class="token-field">
-        <span class="token-label">Refresh Token (Required for Antigravity Tools)</span>
-        <div id="resToken" class="token-val"></div>
-      </div>
-
-      <div class="token-field">
-        <span class="token-label">Access Token (Temporary ~1hr)</span>
-        <div id="resAccess" class="token-val" style="color: #94a3b8; font-size: .75rem;"></div>
-      </div>
-
-      <div class="btn-group" style="margin-top: .8rem;">
-        <button class="btn" onclick="copyResultToken()">📋 Copy Refresh Token</button>
-        <button class="btn btn-secondary" onclick="shareResultToken()">📲 Share Token</button>
-      </div>
-    </div>
+    </details>
   </div>
 
   <!-- Saved Tokens History & Phone Export Card -->
@@ -412,101 +384,7 @@
   </div>
 
   <script>
-    let cachedAuthUrl = "";
-
-    async function getAuthUrl() {
-      if (cachedAuthUrl) return cachedAuthUrl;
-      const resp = await fetch("/api/start");
-      const data = await resp.json();
-      if (data.error) throw new Error(data.error);
-      cachedAuthUrl = data.url;
-      return cachedAuthUrl;
-    }
-
-    async function copyAuthLink() {
-      const btn = document.getElementById("copyLinkBtn");
-      btn.disabled = true;
-      showMsg("linkMsg", "Generating Google link...", "");
-      try {
-        const url = await getAuthUrl();
-        await navigator.clipboard.writeText(url);
-        showMsg("linkMsg", "✅ Google Auth Link copied! Send it to your friend.", "ok");
-      } catch (err) {
-        showMsg("linkMsg", "Failed: " + err.message, "err");
-      } finally {
-        btn.disabled = false;
-      }
-    }
-
-    async function copyChatTemplate() {
-      showMsg("linkMsg", "Generating message...", "");
-      try {
-        const url = await getAuthUrl();
-        const text = `Hey! Could you do this quick Google sign-in for me:\n\n1. Open this link: ${url}\n2. Sign in and tap Allow\n3. You will see a "Site can't be reached" error screen — that is normal! Just copy the entire URL from your browser address bar and send it back to me.`;
-        await navigator.clipboard.writeText(text);
-        showMsg("linkMsg", "✅ Formatted WhatsApp/chat message copied to clipboard!", "ok");
-      } catch (err) {
-        showMsg("linkMsg", "Failed: " + err.message, "err");
-      }
-    }
-
-    async function openAuthDirectly() {
-      try {
-        const url = await getAuthUrl();
-        window.open(url, "_blank");
-      } catch (err) {
-        showMsg("linkMsg", "Failed: " + err.message, "err");
-      }
-    }
-
-    async function exchangeCode() {
-      const input = document.getElementById("manualInput").value.trim();
-      const btn = document.getElementById("exchangeBtn");
-      if (!input) {
-        showMsg("exchangeMsg", "Please paste the broken URL or code from your friend.", "err");
-        return;
-      }
-
-      btn.disabled = true;
-      showMsg("exchangeMsg", "Connecting to Google API...", "");
-      document.getElementById("resultCard").classList.remove("active");
-
-      try {
-        const resp = await fetch("/api/exchange", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ input })
-        });
-        const data = await resp.json();
-
-        if (data.error) {
-          showMsg("exchangeMsg", "❌ " + data.error, "err");
-        } else {
-          showMsg("exchangeMsg", "✅ Token collected successfully!", "ok");
-          document.getElementById("manualInput").value = "";
-
-          const acc = data.account;
-          document.getElementById("resEmail").textContent = (acc.name ? acc.name + " — " : "") + acc.email;
-          document.getElementById("resToken").textContent = acc.refresh_token;
-          document.getElementById("resAccess").textContent = acc.access_token || "(none)";
-          document.getElementById("resultCard").classList.add("active");
-
-          // Save account in storage
-          saveAccount({
-            email: acc.email,
-            name: acc.name,
-            refresh_token: acc.refresh_token,
-            access_token: acc.access_token,
-            saved_at: new Date().toISOString()
-          });
-          renderHistory();
-        }
-      } catch (err) {
-        showMsg("exchangeMsg", "❌ Network error: " + err.message, "err");
-      } finally {
-        btn.disabled = false;
-      }
-    }
+    document.getElementById('siteUrl').textContent = window.location.origin;
 
     function showMsg(id, text, type) {
       const el = document.getElementById(id);
@@ -515,30 +393,23 @@
       el.className = "msg " + (type || "");
     }
 
-    function copyResultToken() {
-      const tok = document.getElementById("resToken").textContent;
-      navigator.clipboard.writeText(tok).then(() => {
-        showMsg("exchangeMsg", "📋 Refresh token copied! Paste it in Antigravity Tools.", "ok");
-      });
-    }
-
-    async function shareResultToken() {
-      const email = document.getElementById("resEmail").textContent;
-      const tok = document.getElementById("resToken").textContent;
-      const shareData = {
-        title: `Google OAuth Token (${email})`,
-        text: `Account: ${email}\nRefresh Token:\n${tok}`
-      };
-
+    async function shareSiteLink() {
+      const text = `Hey! Could you do a quick 1-tap Google sign-in for me here: ${window.location.origin}\nIt will give you a refresh token you can send to me via WhatsApp!`;
       if (navigator.share) {
         try {
-          await navigator.share(shareData);
-          showMsg("exchangeMsg", "✅ Shared successfully!", "ok");
+          await navigator.share({ title: 'Google Sign-in Link', text });
+          return;
         } catch (_) {}
-      } else {
-        await navigator.clipboard.writeText(shareData.text);
-        showMsg("exchangeMsg", "📋 Copied details to clipboard!", "ok");
       }
+      navigator.clipboard.writeText(text);
+      showMsg('linkMsg', '✅ Link copied to clipboard! Send to your friend.', 'ok');
+    }
+
+    function copySiteLink() {
+      navigator.clipboard.writeText(window.location.origin).then(() => {
+        showMsg('linkMsg', '✅ Site link copied to clipboard!', 'ok');
+        setTimeout(() => showMsg('linkMsg', ''), 2500);
+      });
     }
 
     // ── Local Storage Management ──────────────────────────────────────────
@@ -592,7 +463,6 @@
         showMsg("exportMsg", "No accounts saved yet.", "err");
         return;
       }
-      // Line separated refresh tokens ready for Antigravity Tools Bulk Import
       const tokens = list.map(a => a.refresh_token).join("\n");
       navigator.clipboard.writeText(tokens).then(() => {
         showMsg("exportMsg", `📋 Copied ${list.length} refresh token(s) (1 per line) for Bulk Import!`, "ok");
@@ -699,6 +569,48 @@
         showMsg("exportMsg", `📋 Copied ${email} details!`, "ok");
       }
     }
+
+    async function exchangeManualCode() {
+      const input = document.getElementById("manualInput").value.trim();
+      if (!input) return;
+      try {
+        const resp = await fetch("/api/exchange", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ input })
+        });
+        const data = await resp.json();
+        if (data.error) {
+          alert("Error: " + data.error);
+        } else {
+          saveAccount({
+            email: data.account.email,
+            name: data.account.name,
+            refresh_token: data.account.refresh_token,
+            access_token: data.account.access_token,
+            saved_at: new Date().toISOString()
+          });
+          renderHistory();
+          alert("Success! Added: " + data.account.email);
+        }
+      } catch (e) {
+        alert("Failed: " + e.message);
+      }
+    }
+
+    // Listen for popup messages if ever opened from a popup
+    window.addEventListener('message', (e) => {
+      if (e.data && e.data.type === 'oauth-success') {
+        saveAccount({
+          email: e.data.email,
+          name: e.data.name,
+          refresh_token: e.data.refresh_token,
+          access_token: e.data.access_token,
+          saved_at: new Date().toISOString()
+        });
+        renderHistory();
+      }
+    });
 
     renderHistory();
   </script>
