@@ -1,14 +1,24 @@
 /**
  * POST /api/exchange or GET /api/exchange
  * Exchanges a Google OAuth authorization code for a refresh token and access token.
+ * Supports both:
+ * 1. Custom Vercel Client (api/callback redirect)
+ * 2. Antigravity Built-in Client (localhost:9999 redirect)
  */
 
 const https = require("https");
 const url = require("url");
 
-const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
-const REDIRECT_URI = "http://localhost:9999/auth/callback";
+const CUSTOM_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const CUSTOM_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+
+const BUILTIN_CLIENT_ID =
+  process.env.BUILTIN_CLIENT_ID ||
+  process.env.ANTIGRAVITY_CLIENT_ID;
+const BUILTIN_CLIENT_SECRET =
+  process.env.BUILTIN_CLIENT_SECRET ||
+  process.env.ANTIGRAVITY_CLIENT_SECRET;
+const BUILTIN_REDIRECT_URI = "http://localhost:9999/auth/callback";
 
 function extractAuthCode(rawInput) {
   if (!rawInput) return null;
@@ -82,7 +92,6 @@ function httpsGet(hostname, path, token) {
 }
 
 module.exports = async (req, res) => {
-  // CORS support
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -90,17 +99,6 @@ module.exports = async (req, res) => {
 
   if (req.method === "OPTIONS") {
     res.status(200).end();
-    return;
-  }
-
-  if (!CLIENT_ID || !CLIENT_SECRET) {
-    res.setHeader("Content-Type", "application/json");
-    res.status(500).end(
-      JSON.stringify({
-        error:
-          "Server configuration missing: GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET must be set in Vercel Environment Variables.",
-      })
-    );
     return;
   }
 
@@ -137,48 +135,97 @@ module.exports = async (req, res) => {
     return;
   }
 
-  try {
-    const tokenResp = await httpsPost("oauth2.googleapis.com", "/token", {
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-      code,
-      redirect_uri: REDIRECT_URI,
-      grant_type: "authorization_code",
-    });
+  const isExplicitLocalhost =
+    (typeof rawInput === "string" && rawInput.includes("localhost")) ||
+    parsedUrl.query.mode === "localhost";
 
-    if (tokenResp.error) {
-      res.setHeader("Content-Type", "application/json");
-      res.status(400).end(
-        JSON.stringify({
-          error:
-            tokenResp.error_description ||
-            `Token exchange failed (${tokenResp.error})`,
-        })
-      );
-      return;
-    }
+  const proto = req.headers["x-forwarded-proto"] || "https";
+  const host = req.headers["x-forwarded-host"] || req.headers["host"];
+  const customRedirectUri = `${proto}://${host}/api/callback`;
 
-    let userInfo = { email: "Unknown", name: "" };
+  // Candidate credentials to try
+  const attempts = isExplicitLocalhost
+    ? [
+        {
+          id: BUILTIN_CLIENT_ID || CUSTOM_CLIENT_ID,
+          secret: BUILTIN_CLIENT_SECRET || CUSTOM_CLIENT_SECRET,
+          redirect: BUILTIN_REDIRECT_URI,
+          label: "Built-in / Localhost",
+        },
+        {
+          id: CUSTOM_CLIENT_ID,
+          secret: CUSTOM_CLIENT_SECRET,
+          redirect: customRedirectUri,
+          label: "Custom",
+        },
+      ]
+    : [
+        {
+          id: CUSTOM_CLIENT_ID,
+          secret: CUSTOM_CLIENT_SECRET,
+          redirect: customRedirectUri,
+          label: "Custom",
+        },
+        {
+          id: BUILTIN_CLIENT_ID || CUSTOM_CLIENT_ID,
+          secret: BUILTIN_CLIENT_SECRET || CUSTOM_CLIENT_SECRET,
+          redirect: BUILTIN_REDIRECT_URI,
+          label: "Built-in / Localhost",
+        },
+      ];
+
+  let lastError = null;
+
+  for (const cfg of attempts) {
+    if (!cfg.id || !cfg.secret) continue;
+
     try {
-      userInfo = await httpsGet(
-        "www.googleapis.com",
-        "/oauth2/v2/userinfo",
-        tokenResp.access_token
-      );
-    } catch (_) {}
+      const tokenResp = await httpsPost("oauth2.googleapis.com", "/token", {
+        client_id: cfg.id,
+        client_secret: cfg.secret,
+        code,
+        redirect_uri: cfg.redirect,
+        grant_type: "authorization_code",
+      });
 
-    const result = {
-      email: userInfo.email || "Unknown",
-      name: userInfo.name || "",
-      refresh_token: tokenResp.refresh_token,
-      access_token: tokenResp.access_token,
-      expires_in: tokenResp.expires_in,
-    };
+      if (tokenResp.error) {
+        lastError = tokenResp.error_description || tokenResp.error;
+        continue;
+      }
 
-    res.setHeader("Content-Type", "application/json");
-    res.status(200).end(JSON.stringify({ success: true, account: result }));
-  } catch (err) {
-    res.setHeader("Content-Type", "application/json");
-    res.status(500).end(JSON.stringify({ error: err.message }));
+      // Fetch user info
+      let userInfo = { email: "Unknown", name: "" };
+      try {
+        userInfo = await httpsGet(
+          "www.googleapis.com",
+          "/oauth2/v2/userinfo",
+          tokenResp.access_token
+        );
+      } catch (_) {}
+
+      const result = {
+        email: userInfo.email || "Unknown",
+        name: userInfo.name || "",
+        refresh_token: tokenResp.refresh_token,
+        access_token: tokenResp.access_token,
+        expires_in: tokenResp.expires_in,
+        client_used: cfg.label,
+      };
+
+      res.setHeader("Content-Type", "application/json");
+      res.status(200).end(JSON.stringify({ success: true, account: result }));
+      return;
+    } catch (err) {
+      lastError = err.message;
+    }
   }
+
+  res.setHeader("Content-Type", "application/json");
+  res.status(400).end(
+    JSON.stringify({
+      error:
+        lastError ||
+        "Token exchange failed. Please verify that the authorization code is fresh.",
+    })
+  );
 };
